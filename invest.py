@@ -3,6 +3,7 @@
 
 x = 3470 #初始资金，单位美元
 y = 57.38 #每期投入资金
+y_2 = 186.8 #测试用
 mo = int() #目标资金数
 num = int() #投资期数，一年52期
 
@@ -10,20 +11,24 @@ num = int() #投资期数，一年52期
 def money(mo, num): 
     gth = (mo - x - num*y) / (x + num*y) #gth为growth的缩写，代表收益率
     gth_y = (365*gth) / (7*num) 
-    return gth_y     #gth_y为年化收益率
+    return round(gth_y, 4)     #gth_y为年化收益率
 
 print(money(100000, 156)) #235.66%的年化收益率可在3年内积攒到10万美金
 
-#week()这个函数需要添加到money()，体现了定投者场外赚钱能力的提升
+#week_money()为money()的进阶版，体现了定投者场外赚钱能力的提升
 #num代表总投资期数，156期为3年，每隔18周，单次定投金额增加14.38美元
-def week(num, w): #w每隔18周加1，从0开始。
-    while num > 0:
-        num -= 18
-        w += 1
-        z = y + w*14.38
+def week_money(mo, num, w): 
+    while num > 0: #num为总投资期数
+        num -= 18 
+        w += 1 #w每隔18周加1，从0开始。代表定投金额增加
+        z = y + w*14.38 
+        gth = (mo - x - 18*w*y) / (x + 18*w*y)
+        gth_y = (365*gth) / (18*7*w)
         print(round(z, 2))
-    
-week(156, 0) #最后打印出的是每次增加过后的单词定投金额
+    return round(gth_y, 4) #体现了定投者场外赚钱能力的收益率
+
+week_money(100000, 156, 0) #3年达到10万美金，需要219.95%的年化收益率
+
 
 #以后需要添加的功能列表
 #1.查询BTC,EOS,XIN的历史年化收益率，加权后算出BOX的历史年化收益率，即为给定gth_y
