@@ -10,7 +10,7 @@ num = int() #投资期数，一年52期
 def money(mo, num): 
     gth = (mo - x - num*y) / (x + num*y) #gth为growth的缩写，代表收益率
     gth_y = (365*gth) / (7*num) 
-    return gth_y     #gr_y为年化收益率
+    return gth_y     #gth_y为年化收益率
 
 print(money(100000, 156)) #235.66%的年化收益率可在3年内积攒到10万美金
 
